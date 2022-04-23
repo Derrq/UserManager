@@ -1,0 +1,27 @@
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
+}
+.submit-form {
+  max-width: 300px;
+  margin: auto;
+}
+.edit-form {
+  max-width: 300px;
+  margin: auto;
+}
+.user-info{
+  margin-left: -41px;
+  padding: 5px 5px 5px 60px;
+  display: flex;
+  flex-direction: column;
+  color:#5a5a5a;
+  text-align: left;
+  font-family: 'Raleway';
+}
+.btn{
+  margin-left: 10px;
+  align-self: auto;
+  justify-self: center;
+}
