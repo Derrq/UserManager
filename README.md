@@ -7,7 +7,7 @@ A React/Python app built to use Python-tornado's RESTful API to perform CRUD ope
 - py app.py
 
 **To Run Front-end:**
-- cd userApp-frontend
+- cd userApp-frontend/user-app
 - npm start
 
 This runs the app in the development mode. 
