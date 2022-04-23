@@ -11,10 +11,10 @@ class UserDataService {
         return http.post(`api/user/add/`, data);
     }
     update(id,data){
-        return http.put(`/users/${id}`, data);
+        return http.put(`api/user/update/${id}/?user_id=${id}`, data);
     }
     delete(id){
-        return http.delete(`/users/${id}`);
+        return http.delete(`/api/user/delete/${id}/?user_id=${id}`);
     }
     deleteAll(){
         return http.delete(`api/delete/`);

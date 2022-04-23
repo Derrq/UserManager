@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Modal, Button} from 'react-bootstrap';
-import { retrieveUserById } from "../actions/users";
 
 
 
@@ -9,27 +8,11 @@ export default function UpdateUserModal(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [user, updateUser] = useState([]);
-
-
-  let id=props.user_id;
-  //retrieve user by ID then pre-populate then assign user 
-
-  // console.log('retrieved user: '+ props.retrieveById(id));
-
-//   useEffect(function effectFunction() {
-//     retrieveUserById(id)
-//         .then(response => response.json())
-//         .then(({ data: user }) => {
-//           updateUser(user);
-//         });
-// }, []);
  
-
-  const [first_name, setFirstName] = useState("");
-  const [last_name, setLastName] = useState("");
-  const [user_name, setUserName] = useState("");
-  const [date_of_birth, setDOB] = useState("");
+  const [first_name, setFirstName] = useState(props.user.first_name);
+  const [last_name, setLastName] = useState(props.user.last_name);
+  const [user_name, setUserName] = useState(props.user.user_name);
+  const [date_of_birth, setDOB] = useState(props.user.date_of_birth);
   
   const handleSubmit = () => {
       let userData = {
@@ -42,7 +25,7 @@ export default function UpdateUserModal(props) {
           alert('Please fill in the required details');
           return;
       }
-      props.createNewUser(userData);
+      props.editUser(props.user.id, userData);
 
   }
 

@@ -20,14 +20,14 @@ export default function DeleteByIdModal(props) {
         <Modal.Header closeButton>
           <Modal.Title>Delete Confirmation</Modal.Title>
         </Modal.Header>
-        <Modal.Body>You are about to delete this user from the database. This action is irreversible. Continue?</Modal.Body>
+        <Modal.Body>You are about to delete this {props.user.user_name} from the database. This action is irreversible. Continue?</Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>
             No
           </Button>
           <Button variant="primary" onClick={() => {
               handleClose();
-              props.removeAllUsers();
+              props.deleteById(props.user.id);
           }}>
             Yes
           </Button>

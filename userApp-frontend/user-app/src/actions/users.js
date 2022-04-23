@@ -58,9 +58,15 @@ import {
   export const updateUser = (id, data) => async (dispatch) => {
     try {
       const res = await UserDataService.update(id, data);
+      res.data={
+        "first_name": data.first_name,
+        "last_name": data.last_name,
+        "user_name": data.user_name,
+        "date_of_birth": data.date_of_birth,
+      }
       dispatch({
         type: UPDATE_USER,
-        payload: data,
+        payload: res.data,
       });
       return Promise.resolve(res.data);
     } catch (err) {

@@ -8,11 +8,10 @@ import { createUser, updateUser, deleteUser, retrieveUsers, retrieveUserById, de
 class UsersList extends Component {
   constructor(props) {
     super(props);
-    this.refreshData = this.refreshData.bind(this);
-    this.removeAllUsers = this.removeAllUsers.bind(this);
-    this.createNewUser =this.createNewUser.bind(this);
-    this.editUser =this.editUser.bind(this);
-    this.deleteById =this.deleteById.bind(this);
+    // this.removeAllUsers = this.removeAllUsers.bind(this);
+    // this.createNewUser =this.createNewUser.bind(this);
+    // this.editUser =this.editUser.bind(this);
+    // this.deleteById =this.deleteById.bind(this);
     this.state = {
         users: [],
         show: false,
@@ -21,65 +20,52 @@ class UsersList extends Component {
   componentDidMount() {
     this.props.retrieveUsers();
   }
-  onChangeSearchTitle(e) {
-    const searchTitle = e.target.value;
-    this.setState({
-      searchTitle: searchTitle,
-    });
-  }
+
   showModal = e => {
     this.setState({
       show: !this.state.show
     });
   }
-  refreshData() {
-    this.setState({
-      currentUser: null,
-      currentIndex: -1,
+
+  retrieveById=(id)=>{
+    this.props.retrieveUserById(id)
+    .then((response) =>{
+      console.log(response);
+    }).catch((e)=>{
+      console.log(e);
     });
   }
 
-  // retrieveById=(id)=>{
-  //   this.props.retrieveUserById(id)
-  //   .then((response) =>{
-  //     console.log(response);
-  //   }).catch((e)=>{
-  //     console.log(e);
-  //   });
-  // }
-
-  createNewUser(data){
+  createNewUser=(data)=>{
     this.props.createUser(data)
     .then((response) =>{
       console.log(response);
-      this.refreshData();
     }).catch((e)=>{
       console.log(e);
     });
   }
-  editUser(id, data){
+  editUser=(id, data)=>{
     this.props.updateUser(id, data)
     .then((response) =>{
       console.log(response);
-      this.refreshData();
+      this.props.retrieveUsers();
     }).catch((e)=>{
       console.log(e);
     });
   }
-  deleteById(id){
+  deleteById=(id)=>{
     this.props.deleteUser(id)
     .then((response)=>{
-      this.refreshData();
+      console.log(response);
     }).catch((e)=>{
       console.log(e);
     });
   }
-  removeAllUsers() {
+  removeAllUsers=()=> {
     this.props
       .deleteAllUsers()
       .then((response) => {
         console.log(response);
-        this.refreshData();
       })
       .catch((e) => {
         console.log(e);
@@ -110,8 +96,8 @@ class UsersList extends Component {
                   <td>{user.last_name}</td>
                   <td>{user.user_name}</td>
                   <td>{user.date_of_birth}</td>
-                  <th><EditUser editUser={this.editUser} user_id={user.id}/></th>
-                  <th><DeleteByIdModal deleteById={this.deleteById}/></th>
+                  <th><EditUser editUser={this.editUser} user={user} /></th>
+                  <th><DeleteByIdModal deleteById={this.deleteById} user={user}/></th>
               </tr>
             </tbody>
           : <p> No Record to display</p> )) 

@@ -22,7 +22,7 @@ class UserList(RequestHandler):
 
   def get(self):
     print("Clearing all users records")
-    query= "SELECT * FROM user_table"
+    query= "SELECT * FROM user_table ORDER BY id ASC"
     cur.execute("ROLLBACK")
     conn.commit()
     cur.execute(query)
@@ -50,7 +50,7 @@ class UserItem(RequestHandler):
   def get(self, user_id=None):
     print("Retrieving User Record")
     user_id = self.get_arguments('user_id')
-    query= "SELECT * FROM user_table WHERE id =%s"
+    query= "SELECT * FROM user_table WHERE id =%s "
     cur.execute(query, user_id)
     queriedUser=cur.fetchall()
     if queriedUser == []:
@@ -64,7 +64,7 @@ class UserItem(RequestHandler):
       print(queriedUser)
 
 
-  def options(self):
+  def options(self, data=None):
     # no body
     self.set_status(204)
     self.finish()
