@@ -89,7 +89,7 @@ class UsersList extends Component {
         </thead>
         {
         users.map((user, index)=>(
-          user ?
+          user?
             <tbody key={index}>
               <tr>
                   <td>{user.first_name}</td>
@@ -100,7 +100,8 @@ class UsersList extends Component {
                   <th><DeleteByIdModal deleteById={this.deleteById} user={user}/></th>
               </tr>
             </tbody>
-          : <p> No Record to display</p> )) 
+          : <p> No Record to display</p> 
+          )) 
       }
 
       </table>
